@@ -1,15 +1,15 @@
 //+------------------------------------------------------------------+
 //| IRENX PRIME - MT5 Live Data Adapter                             |
 //| Sends multi-timeframe market snapshots to IRENX Intelligence.   |
-//| This adapter DOES NOT place trades.                             |
+//| Analysis-only: this EA does not place trades.                  |
 //+------------------------------------------------------------------+
 #property strict
-#property version   "1.0"
+#property version   "1.1"
 #property description "IRENX PRIME MT5 Live Data Adapter - analysis only"
 
 input string InpEndpoint      = "https://YOUR-VERCEL-DOMAIN.vercel.app/api/intelligence";
 input string InpApiKey        = "CHANGE_ME";
-input string InpSymbol        = "";       // blank = current chart symbol
+input string InpSymbol        = "";
 input int    InpBarsPerTF     = 40;
 input int    InpIntervalSec   = 15;
 input bool   InpSendOnNewBar  = true;
@@ -28,10 +28,7 @@ string JsonEscape(string s)
    return s;
 }
 
-string Num(double v,int digits=6)
-{
-   return DoubleToString(v,digits);
-}
+string Num(double v,int digits=6) { return DoubleToString(v,digits); }
 
 string BarArray(ENUM_TIMEFRAMES tf,int count)
 {
@@ -55,16 +52,64 @@ string BarArray(ENUM_TIMEFRAMES tf,int count)
    return out+"]";
 }
 
-string TFName(ENUM_TIMEFRAMES tf)
+string JsonField(string json,string key)
 {
-   if(tf==PERIOD_MN1) return "MN";
-   if(tf==PERIOD_D1)  return "D1";
-   if(tf==PERIOD_H4)  return "H4";
-   if(tf==PERIOD_H1)  return "H1";
-   if(tf==PERIOD_M30) return "M30";
-   if(tf==PERIOD_M15) return "M15";
-   if(tf==PERIOD_M5)  return "M5";
-   return EnumToString(tf);
+   string token="\""+key+"\"";
+   int p=StringFind(json,token);
+   if(p<0) return "-";
+   p=StringFind(json,":",p+StringLen(token));
+   if(p<0) return "-";
+   p++;
+   while(p<StringLen(json) && (StringGetCharacter(json,p)==' ' || StringGetCharacter(json,p)=='\t')) p++;
+   if(p<StringLen(json) && StringGetCharacter(json,p)=='\"')
+   {
+      p++;
+      int e=StringFind(json,"\"",p);
+      if(e<0) return "-";
+      return StringSubstr(json,p,e-p);
+   }
+   int e1=StringFind(json,",",p);
+   int e2=StringFind(json,"}",p);
+   int e=e1;
+   if(e<0 || (e2>=0 && e2<e)) e=e2;
+   if(e<0) e=StringLen(json);
+   string v=StringSubstr(json,p,e-p);
+   StringTrimLeft(v); StringTrimRight(v);
+   return v;
+}
+
+void ShowSignal(string body,int http_code)
+{
+   string status=JsonField(body,"status");
+   string bias=JsonField(body,"bias");
+   string confidence=JsonField(body,"confidence");
+   string entry=JsonField(body,"entry");
+   string sl=JsonField(body,"sl");
+   string tp1=JsonField(body,"tp1");
+   string tp2=JsonField(body,"tp2");
+   string tp3=JsonField(body,"tp3");
+   string trigger=JsonField(body,"trigger");
+   string invalidation=JsonField(body,"invalidation");
+   string next_action=JsonField(body,"next_action");
+   string regime=JsonField(body,"regime");
+
+   string panel="IRENX PRIME LIVE\n";
+   panel+="------------------------------\n";
+   panel+="SYMBOL   : "+g_symbol+"\n";
+   panel+="STATUS   : "+status+"\n";
+   panel+="BIAS     : "+bias+"\n";
+   panel+="CONF     : "+confidence+"\n";
+   panel+="ENTRY    : "+entry+"\n";
+   panel+="SL       : "+sl+"\n";
+   panel+="TP1      : "+tp1+"\n";
+   panel+="TP2      : "+tp2+"\n";
+   panel+="TP3      : "+tp3+"\n";
+   panel+="REGIME   : "+regime+"\n";
+   panel+="TRIGGER  : "+trigger+"\n";
+   panel+="INVALID  : "+invalidation+"\n";
+   panel+="ACTION   : "+next_action+"\n";
+   panel+="HTTP     : "+(string)http_code;
+   Comment(panel);
 }
 
 string BuildPayload()
@@ -79,7 +124,7 @@ string BuildPayload()
    string p="{";
    p+="\"symbol\":\""+JsonEscape(g_symbol)+"\",";
    p+="\"source\":\"MT5\",";
-   p+="\"adapter_version\":\"1.0\",";
+   p+="\"adapter_version\":\"1.1\",";
    p+="\"timestamp\":"+(string)TimeCurrent()+",";
    p+="\"market\":{";
    p+="\"bid\":"+Num(tick.bid,(int)digits)+",";
@@ -117,19 +162,15 @@ bool SendSnapshot()
    int code=WebRequest("POST",InpEndpoint,headers,10000,data,result,response_headers);
    if(code==-1)
    {
-      Print("IRENX WebRequest failed. Error=",GetLastError(),". Add endpoint domain under Tools > Options > Expert Advisors > Allow WebRequest.");
+      int err=GetLastError();
+      Print("IRENX WebRequest failed. Error=",err,". Add endpoint domain under Tools > Options > Expert Advisors > Allow WebRequest.");
+      if(InpShowPanel) Comment("IRENX PRIME\nWEBREQUEST ERROR: ",(string)err);
       return false;
    }
 
    string body=CharArrayToString(result,0,-1,CP_UTF8);
    Print("IRENX HTTP ",code," | ",body);
-
-   if(InpShowPanel)
-   {
-      string short_body=body;
-      if(StringLen(short_body)>900) short_body=StringSubstr(short_body,0,900)+"...";
-      Comment("IRENX PRIME LIVE\n",g_symbol,"\nHTTP ",code,"\n",short_body);
-   }
+   if(InpShowPanel) ShowSignal(body,code);
    return (code>=200 && code<300);
 }
 
@@ -159,7 +200,7 @@ void OnTick()
    if(bar>0 && bar!=g_last_bar_m5)
    {
       g_last_bar_m5=bar;
-      SendSnapshot();
+      if(SendSnapshot()) g_last_sent=TimeCurrent();
    }
 }
 

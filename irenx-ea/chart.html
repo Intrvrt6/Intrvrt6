@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IRENX PRIME — Chart Workspace</title>
+<style>
+:root{--bg:#07090d;--panel:#0d1118;--line:#202938;--text:#eef3f8;--muted:#8995a7;--accent:#55a8ff;--green:#20d98a;--red:#ff5266;--gold:#f4c95d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,system-ui,sans-serif}.wrap{max-width:1400px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.brand{font-weight:900;letter-spacing:.12em}.brand b{color:var(--accent)}.controls{display:flex;flex-wrap:wrap;gap:8px}.btn,select{background:#0c121b;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px 12px}.btn{cursor:pointer;font-weight:800}.btn.primary{border-color:#2d79ba;background:#0d1c2d}.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden}.chart{height:650px}.side{padding:16px}.drop{border:1px dashed #3b4a60;border-radius:12px;padding:22px;text-align:center;background:#0a0f16}.drop input{width:100%;margin-top:12px}.preview{margin-top:10px;max-width:100%;max-height:180px;border-radius:10px;display:none}.status{margin-top:14px;padding:12px;border-radius:10px;background:#0a0f16;color:var(--muted)}.signal{margin-top:14px}.big{font-size:34px;font-weight:900;margin:6px 0}.green{color:var(--green)}.red{color:var(--red)}.gold{color:var(--gold)}.metric{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #1b2330}.metric:last-child{border:0}.small{color:var(--muted);line-height:1.5;font-size:12px}@media(max-width:900px){.layout{grid-template-columns:1fr}.chart{height:520px}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">IRENX <b>PRIME</b> / CHART WORKSPACE</div><div class="controls"><select id="symbol"><option value="OANDA:XAUUSD">XAUUSD</option><option value="FX_IDC:XAUUSD">XAUUSD FX IDC</option><option value="FOREXCOM:XAUUSD">XAUUSD FOREXCOM</option></select><button class="btn" data-interval="5">M5</button><button class="btn" data-interval="15">M15</button><button class="btn" data-interval="30">M30</button><button class="btn" data-interval="60">H1</button><button class="btn" data-interval="240">H4</button><button class="btn" data-interval="D">D1</button></div></header>
+<div class="layout">
+<section class="panel"><div id="tv" class="chart"></div></section>
+<aside class="panel side">
+<h2>IRENX SIGNAL</h2>
+<div class="drop"><strong>Upload chart screenshot</strong><div class="small">One image or a set of D1/H4/M30/M15/M5 screenshots can be supplied to the future vision backend.</div><input id="file" type="file" accept="image/*" multiple><img id="preview" class="preview" alt="Chart preview"></div>
+<button id="analyze" class="btn primary" style="width:100%;margin-top:10px">ANALYZE WITH IRENX</button>
+<div id="status" class="status">READY — choose Live Chart or upload a screenshot.</div>
+<div class="signal"><div class="metric"><span>BIAS</span><b id="bias" class="gold">WAIT</b></div><div class="metric"><span>ENTRY</span><b id="entry">—</b></div><div class="metric"><span>SL</span><b id="sl">—</b></div><div class="metric"><span>TP1</span><b id="tp1">—</b></div><div class="metric"><span>TP2</span><b id="tp2">—</b></div><div class="metric"><span>TP3</span><b id="tp3">—</b></div><div class="metric"><span>STATUS</span><b class="gold">NO TRADE</b></div></div>
+<p class="small">The embedded TradingView chart is the visualization layer. Production automatic analysis requires an authorized market-data adapter or a server-side vision/inference endpoint. This page intentionally does not invent a signal from an image it cannot actually analyze.</p>
+</aside>
+</div>
+</div>
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+let interval='15';
+function render(){document.getElementById('tv').innerHTML='';new TradingView.widget({autosize:true,symbol:document.getElementById('symbol').value,interval,timezone:'Asia/Jakarta',theme:'dark',style:'1',locale:'en',hide_top_toolbar:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:true,container_id:'tv',studies:['Volume@tv-basicstudies'],support_host:'https://www.tradingview.com'});}
+document.querySelectorAll('[data-interval]').forEach(b=>b.addEventListener('click',()=>{interval=b.dataset.interval;render()}));
+document.getElementById('symbol').addEventListener('change',render);
+document.getElementById('file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const img=document.getElementById('preview');img.src=URL.createObjectURL(f);img.style.display='block';document.getElementById('status').textContent=`${e.target.files.length} chart image(s) loaded — ready for vision analysis.`});
+document.getElementById('analyze').addEventListener('click',()=>{document.getElementById('status').textContent='IMAGE/DATA READY — connect the IRENX vision/inference backend to produce a real signal. No fabricated signal is generated by this static page.'});
+render();
+</script>
+</body>
+</html>

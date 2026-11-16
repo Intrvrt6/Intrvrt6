@@ -1,1 +1,133 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IRENX PRIME — AI Signal Workspace</title><style>body{margin:0;background:#06080c;color:#eef3f8;font:14px system-ui}.wrap{max-width:1500px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.brand{font-weight:900;letter-spacing:.12em}.brand b{color:#55a8ff}.controls{display:flex;gap:7px;flex-wrap:wrap}.btn,select{background:#0b1119;color:#eef3f8;border:1px solid #202938;border-radius:9px;padding:10px 12px}.btn{cursor:pointer;font-weight:800}.primary{background:#0d1c2d;border-color:#2d79ba}.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px}.panel{background:#0d1118;border:1px solid #202938;border-radius:15px;overflow:hidden}.chart{height:680px}.side{padding:16px}.drop{border:1px dashed #40516a;border-radius:12px;padding:20px;text-align:center;background:#090e15}.drop.drag{border-color:#55a8ff}.drop input{display:none}.drop label{display:inline-block;margin-top:12px;padding:10px 14px;border:1px solid #202938;border-radius:9px;cursor:pointer}.files{display:grid;gap:7px;margin-top:10px}.file{display:flex;justify-content:space-between;padding:8px 10px;background:#090e15;border:1px solid #1b2330;border-radius:8px}.preview{display:flex;gap:6px;overflow:auto;margin-top:10px}.thumb{width:78px;height:55px;object-fit:cover;border-radius:7px}.status{margin-top:12px;padding:11px;border-radius:9px;background:#090e15;color:#8b97a8}.section{margin-top:14px}.section h3{margin:0 0 9px}.tf{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.tf button{padding:8px 3px;background:#090e15;color:#8b97a8;border:1px solid #202938;border-radius:7px}.tf button.active{color:#55a8ff;border-color:#2d79ba}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px}.metric{padding:10px;background:#090e15;border:1px solid #1b2330;border-radius:8px}.metric span{display:block;color:#8b97a8;font-size:11px}.metric b{display:block;margin-top:3px}.green{color:#20d98a}.red{color:#ff5266}.gold{color:#f4c95d}textarea{width:100%;min-height:120px;background:#080c12;color:#cdd7e4;border:1px solid #202938;border-radius:9px;padding:10px}.notice{font-size:11px;line-height:1.5;color:#8b97a8}@media(max-width:1000px){.layout{grid-template-columns:1fr}.chart{height:560px}}@media(max-width:600px){.wrap{padding:12px}.top{align-items:flex-start;flex-direction:column}.tf{grid-template-columns:repeat(3,1fr)}}</style></head><body><div class="wrap"><header class="top"><div class="brand">IRENX <b>PRIME</b> / AI SIGNAL</div><div class="controls"><select id="symbol"><option>OANDA:XAUUSD</option><option>FOREXCOM:XAUUSD</option><option>FX_IDC:XAUUSD</option></select><button class="btn" id="live">LIVE CHART</button><button class="btn primary" id="focus">🥶 IRENX SIGNAL</button></div></header><div class="layout"><section class="panel"><div id="tv" class="chart"></div></section><aside class="panel side"><h2 style="margin-top:0">📸 Chart Input</h2><div id="drop" class="drop"><b>Drop screenshots here</b><div class="notice">D1 + H4 + M30 + M15 + M5 memberi context terbaik.</div><label for="file">＋ PILIH FOTO</label><input id="file" type="file" accept="image/*" multiple></div><div id="files" class="files"></div><div id="preview" class="preview"></div><button id="analyze" class="btn primary" style="width:100%;margin-top:10px">🥶 ANALYZE IRENX</button><div id="status" class="status">READY</div><div class="section"><h3>Timeframe Evidence</h3><div class="tf"><button data-tf="MN">MN</button><button data-tf="D1">D1</button><button data-tf="H4">H4</button><button data-tf="M30">M30</button><button data-tf="M15">M15</button><button data-tf="M5">M5</button></div></div><div class="section"><h3>Signal Output</h3><div class="metrics"><div class="metric"><span>BIAS</span><b id="bias" class="gold">WAIT</b></div><div class="metric"><span>CONFIDENCE</span><b id="confidence">—</b></div><div class="metric"><span>ENTRY</span><b id="entry">—</b></div><div class="metric"><span>SL</span><b id="sl">—</b></div><div class="metric"><span>TP1 / TP2 / TP3</span><b id="tp">—</b></div><div class="metric"><span>STATUS</span><b id="state" class="gold">NO TRADE</b></div></div><div class="status" id="details">Trigger: —<br>Invalidation: —</div></div><div class="section"><h3>Analysis Notes</h3><textarea id="notes" readonly></textarea></div><p class="notice">Backend menggunakan OpenAI Responses API. API key tetap server-side di Vercel environment variable dan tidak pernah dikirim ke browser. Signal tetap probabilistic; IRENX mempertahankan WAIT/NO TRADE saat evidence tidak cukup.</p></aside></div></div><script src="/speed-insights.js" defer></script><script src="https://s3.tradingview.com/tv.js"></script><script>let interval='15',selectedTF=[],files=[];function render(){document.getElementById('tv').innerHTML='';new TradingView.widget({autosize:true,symbol:document.getElementById('symbol').value,interval,timezone:'Asia/Jakarta',theme:'dark',style:'1',locale:'en',hide_top_toolbar:false,hide_side_toolbar:false,allow_symbol_change:true,save_image:true,container_id:'tv',studies:['Volume@tv-basicstudies'],support_host:'https://www.tradingview.com'});}document.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>{b.classList.toggle('active');selectedTF=[...document.querySelectorAll('[data-tf].active')].map(x=>x.dataset.tf)});document.getElementById('symbol').onchange=render;function load(list){files=[...files,...list];document.getElementById('files').innerHTML=files.map(f=>`<div class="file"><span>${f.name}</span><span>${Math.round(f.size/1024)} KB</span></div>`).join('');document.getElementById('preview').innerHTML='';files.forEach(f=>{let im=document.createElement('img');im.className='thumb';im.src=URL.createObjectURL(f);document.getElementById('preview').appendChild(im)});document.getElementById('status').textContent=files.length+' chart image(s) ready.'}document.getElementById('file').onchange=e=>load(e.target.files);const drop=document.getElementById('drop');['dragenter','dragover'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.add('drag')}));['dragleave','drop'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.remove('drag')}));drop.ondrop=e=>load(e.dataTransfer.files);function dataURL(f){return new Promise((r,j)=>{let q=new FileReader;q.onload=()=>r(q.result);q.onerror=j;q.readAsDataURL(f)})}function set(id,v){document.getElementById(id).textContent=v??'—'}document.getElementById('analyze').onclick=async()=>{if(!files.length){set('state','WAIT');document.getElementById('status').textContent='Upload at least one chart screenshot.';return}document.getElementById('status').textContent='ANALYZING — IRENX Vision + PRIME logic...';document.getElementById('analyze').disabled=true;try{const images=await Promise.all(files.slice(0,8).map(dataURL));const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({images,symbol:document.getElementById('symbol').value,timeframe:selectedTF.join(',')||'multi'})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Analysis failed');set('bias',d.bias);set('confidence',d.confidence!=null?d.confidence+'%':'—');set('entry',d.entry);set('sl',d.sl);set('tp',[d.tp1,d.tp2,d.tp3].filter(Boolean).join(' / ')||'—');set('state',d.status);document.getElementById('details').innerHTML='<b>Trigger:</b> '+(d.trigger||'—')+'<br><b>Invalidation:</b> '+(d.invalidation||'—');document.getElementById('notes').value=d.notes||'';document.getElementById('status').textContent='IRENX SIGNAL READY — '+(d.status||'WAIT')}catch(e){document.getElementById('status').textContent='ERROR — '+e.message}finally{document.getElementById('analyze').disabled=false}};document.getElementById('focus').onclick=()=>document.getElementById('analyze').click();document.getElementById('live').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});render();</script></body></html>
+<!--
+EVST // CYBER OPERATIONS
+GitHub Profile: Intrvrt6
+Theme: Black / Crimson / Cyberpunk
+-->
+
+<div align="center">
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=venom&height=260&text=EVST&fontSize=85&fontColor=ff3030&stroke=ff0000&strokeWidth=2&animation=fadeIn&color=0:050505,40:180000,100:050505&desc=CYBER%20OPERATIONS%20%7C%20REVERSE%20ENGINEERING&descSize=15&descAlignY=70" />
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=19&duration=2500&pause=900&color=FF3030&center=true&vCenter=true&width=650&lines=%3E+INITIALIZING+EVST+SYSTEM...;%3E+SECURITY+RESEARCHER;%3E+REVERSE+ENGINEERING+ENTHUSIAST;%3E+LINUX+%7C+PYTHON+%7C+BINARY+ANALYSIS;%3E+HACK.+ANALYZE.+SECURE." />
+
+<br/>
+
+<img src="https://img.shields.io/badge/IDENTITY-EVST-ff0000?style=for-the-badge&logo=hackthebox&logoColor=white" />
+<img src="https://img.shields.io/badge/FOCUS-CYBERSECURITY-111111?style=for-the-badge&logo=kalilinux&logoColor=red" />
+<img src="https://img.shields.io/badge/MODE-ALWAYS_LEARNING-111111?style=for-the-badge&logo=linux&logoColor=white" />
+
+<br/><br/>
+
+<strong>HACK. ANALYZE. SECURE.</strong>
+
+<em>Think deeper. Break further. Secure better.</em>
+
+</div>
+
+---
+
+## `01` // WHO AM I
+
+```bash
+┌──[EVST@Intrvrt6]
+└─$ whoami
+
+Identity: EVST
+Codename: Intrvrt6
+Focus: Cyber Security
+Interest: Reverse Engineering
+Environment: Linux
+Status: Learning & Building
+```
+
+I'm a cybersecurity enthusiast interested in understanding systems, exploring software internals, and researching digital security.
+
+I enjoy reverse engineering, Linux environments, security research, and learning how software works beneath the surface.
+
+## `02` // OPERATIONAL DOMAINS
+
+| Domain | Focus |
+|---|---|
+| 🔴 Red Team | Authorized security testing |
+| ⚫ Reverse Engineering | Binary and software analysis |
+| 🛡️ Blue Team | Defense and detection |
+| 🐧 Linux | System administration |
+| 🔬 Digital Forensics | Static and dynamic analysis |
+
+## `03` // TECH ARSENAL
+
+<div align="center">
+
+**PROGRAMMING & SCRIPTING**
+
+<img src="https://skillicons.dev/icons?i=python,c,cpp,bash&theme=dark" />
+
+**OPERATING SYSTEMS & SECURITY**
+
+<img src="https://skillicons.dev/icons?i=linux,kali,docker&theme=dark" />
+
+**DEVELOPMENT & TOOLS**
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode&theme=dark" />
+
+</div>
+
+## `04` // CURRENT RESEARCH
+
+- Reverse Engineering
+- Binary Analysis
+- Linux Internals
+- Network Security
+- Digital Forensics
+- Secure Coding
+- Malware analysis in isolated labs
+
+## `05` // GITHUB INTELLIGENCE
+
+<div align="center">
+
+<img width="49%" src="https://github-readme-stats.vercel.app/api?username=Intrvrt6&show_icons=true&hide_border=true&bg_color=080808&title_color=ff3030&icon_color=ff3030&text_color=ffffff&include_all_commits=true" />
+
+<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Intrvrt6&layout=compact&hide_border=true&bg_color=080808&title_color=ff3030&text_color=ffffff" />
+
+<br/><br/>
+
+<img width="90%" src="https://streak-stats.demolab.com?user=Intrvrt6&hide_border=true&background=080808&stroke=ff3030&ring=ff3030&fire=ff3030&currStreakLabel=ff3030&sideLabels=ffffff&currStreakNum=ffffff&sideNums=ffffff&dates=888888" />
+
+</div>
+
+## `06` // CONTRIBUTION MATRIX
+
+<div align="center">
+
+<img width="100%" src="https://raw.githubusercontent.com/Intrvrt6/Intrvrt6/output/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake" />
+
+</div>
+
+## `07` // CONNECT
+
+<div align="center">
+
+<a href="https://github.com/Intrvrt6">
+  <img src="https://img.shields.io/badge/GITHUB-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a>
+
+<a href="https://github.com/Intrvrt6?tab=repositories">
+  <img src="https://img.shields.io/badge/PROJECTS-111111?style=for-the-badge&logo=github&logoColor=red" alt="Projects" />
+</a>
+
+</div>
+
+---
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=17&duration=2500&pause=1000&color=FF3030&center=true&vCenter=true&width=500&lines=STAY+CURIOUS.;THINK+DIFFERENT.;NEVER+STOP+LEARNING." />
+
+### `HACK. ANALYZE. SECURE.`
+
+<sub>EVST // Intrvrt6 — Exploring the digital frontier.</sub>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:550000,100:ff0000&height=120&section=footer" />
+
+</div>

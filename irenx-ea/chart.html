@@ -1,41 +1,133 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05070b">
-<title>IRENX PRIME — Live Web Terminal</title>
-<style>
-:root{--bg:#05070b;--panel:#0a0f16;--panel2:#0d131c;--line:#1b2735;--text:#edf4fb;--muted:#7d8b9e;--blue:#55a8ff;--green:#19df91;--red:#ff5268;--gold:#f3c85b;--cyan:#49d8ff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(900px 500px at 70% -10%,#10243a 0,transparent 60%),linear-gradient(180deg,#05070b,#070a10 60%,#05070b);color:var(--text);font:13px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,select{font:inherit}.app{max-width:1600px;margin:auto;padding:10px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.brand{font-size:15px;font-weight:950;letter-spacing:.16em}.brand span{color:var(--blue)}.sub{display:block;margin-top:3px;color:var(--muted);font-size:9px;letter-spacing:.09em}.actions{display:flex;gap:6px;align-items:center}.btn,select{border:1px solid var(--line);background:#0a1018;color:var(--text);border-radius:9px;padding:8px 10px;font-weight:800}.btn{cursor:pointer}.btn.primary{border-color:#286da7;background:#0d2033;color:#c4e5ff}.live{display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:10px}.panel{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:linear-gradient(180deg,#0b1017,#080c12);box-shadow:0 15px 50px #0006}.charthead{height:44px;padding:8px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#090e15}.symbol{font-weight:900}.price{color:var(--green);font-variant-numeric:tabular-nums}.chart{height:calc(100vh - 96px);min-height:560px}.side{padding:10px;max-height:calc(100vh - 64px);overflow:auto}.section{margin-bottom:11px}.title{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;color:#a5b1c1;font-size:10px;text-transform:uppercase;letter-spacing:.08em}.badge{padding:4px 7px;border:1px solid var(--line);border-radius:6px;background:#0b1622;color:#8fa2b8;font-size:9px}.notice{color:var(--muted);font-size:10px;line-height:1.5}.status{margin-top:7px;padding:8px 9px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:10px}.status.ok{color:var(--green)}.status.busy{color:var(--cyan)}.status.err{color:var(--red)}.tf{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.tf button{padding:7px 2px;border:1px solid #1b2735;background:#080d14;color:#748297;border-radius:6px;font-weight:800;font-size:10px}.tf button.active{border-color:#2b72aa;background:#0c1b2a;color:#bfe3ff}.signal{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#080d14}.sigtop{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid var(--line)}.bias{font-size:24px;font-weight:950}.buy{color:var(--green)}.sell{color:var(--red)}.wait{color:var(--gold)}.conf{color:var(--muted);font-size:10px}.metrics{display:grid;grid-template-columns:1fr 1fr}.metric{padding:9px 10px;border-bottom:1px solid #151e29}.metric:nth-child(odd){border-right:1px solid #151e29}.metric span{display:block;color:#66758a;font-size:8px;text-transform:uppercase;letter-spacing:.07em}.metric b{display:block;margin-top:3px;font-size:11px;word-break:break-word}.details{padding:9px 10px;color:#9aa8ba;font-size:10px;line-height:1.55}.stack{display:grid;gap:5px}.row{display:flex;justify-content:space-between;gap:10px;padding:7px 8px;border:1px solid #17212d;background:#080d14;border-radius:7px}.row span{color:#718096}.row b{text-align:right}.green{color:var(--green)}.red{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}textarea{width:100%;min-height:105px;resize:vertical;background:#070b11;color:#bdc9d8;border:1px solid var(--line);border-radius:8px;padding:9px;font:10px ui-monospace,SFMono-Regular,monospace;outline:none}.engine{color:#637187;font-size:9px;line-height:1.55}.engine code{color:#9cb2ca}.footer{text-align:center;color:#526074;font-size:9px;padding:8px}.disabled{opacity:.55;pointer-events:none}@media(max-width:1050px){.workspace{grid-template-columns:1fr}.side{max-height:none}.chart{height:560px}}@media(max-width:600px){.app{padding:7px}.actions select{max-width:115px}.live-text{display:none}.chart{height:470px;min-height:420px}.side{padding:8px}.tf{grid-template-columns:repeat(3,1fr)}}
-</style>
-</head>
-<body>
-<main class="app">
-<header class="top">
-<div><div class="brand">IRENX <span>PRIME</span></div><span class="sub">LIVE WEB TERMINAL • NO IMAGE UPLOAD • SELECTIVE SIGNAL ENGINE</span></div>
-<div class="actions"><select id="symbol"><option value="XAUUSD">XAUUSD</option><option value="GOLD">GOLD / GC FUTURES PROXY</option></select><button class="btn live"><i class="dot"></i><span class="live-text">LIVE</span></button><button class="btn primary" id="focus">🥶 SIGNAL</button></div>
-</header>
-<div class="workspace">
-<section class="panel"><div class="charthead"><span class="symbol" id="symbolLabel">XAUUSD</span><span class="price" id="clock">ASIA/JAKARTA • CONNECTING</span></div><div id="tv" class="chart"></div></section>
-<aside class="panel side">
-<section class="section"><div class="title"><span>Live Engine</span><span class="badge">WEB</span></div><div class="notice">IRENX membaca data market dari server. Tidak membutuhkan upload screenshot. Analisis bersifat decision-support; bukan jaminan profit atau perintah eksekusi.</div><button id="analyze" class="btn primary" style="width:100%;margin-top:9px;padding:11px">🥶 ANALYZE LIVE MARKET</button><div id="status" class="status">● INITIALIZING…</div></section>
-<section class="section"><div class="title"><span>Timeframe</span><span id="tfCount" class="badge">5 TF</span></div><div class="tf"><button data-tf="1d" class="active">D1</button><button data-tf="4h" class="active">H4</button><button data-tf="30m" class="active">M30</button><button data-tf="15m" class="active">M15</button><button data-tf="5m" class="active">M5</button></div></section>
-<section class="section"><div class="title"><span>IRENX Signal</span><span id="engineBadge" class="badge">WAIT</span></div><div class="signal"><div class="sigtop"><span id="bias" class="bias wait">WAIT</span><span id="confidence" class="conf">CONF —</span></div><div class="metrics"><div class="metric"><span>Entry / Zone</span><b id="entry">—</b></div><div class="metric"><span>Stop Loss</span><b id="sl">—</b></div><div class="metric"><span>TP1</span><b id="tp1">—</b></div><div class="metric"><span>TP2</span><b id="tp2">—</b></div><div class="metric"><span>TP3</span><b id="tp3">—</b></div><div class="metric"><span>Status</span><b id="state" class="gold">NO TRADE</b></div></div><div id="details" class="details"><b>Trigger:</b> —<br><b>Invalidation:</b> —</div></div></section>
-<section class="section"><div class="title"><span>PRIME Layers</span><span class="badge">SEQUENTIAL</span></div><div class="stack"><div class="row"><span>REGIME</span><b id="regime">—</b></div><div class="row"><span>LIQUIDITY</span><b id="liquidity">—</b></div><div class="row"><span>REFLEXIVITY</span><b id="reflexivity">—</b></div><div class="row"><span>OROCHI / STRUCTURE</span><b id="structure">—</b></div><div class="row"><span>VMAP</span><b id="vmap">—</b></div><div class="row"><span>FORECAST</span><b id="forecast">—</b></div><div class="row"><span>RISK</span><b id="risk">—</b></div></div></section>
-<section class="section"><div class="title"><span>Analysis Notes</span><span class="badge">RULE ENGINE</span></div><textarea id="notes" readonly placeholder="Analisis akan muncul di sini…"></textarea></section>
-<p class="engine">Architecture: <code>DATA QUALITY → REGIME → LIQUIDITY → REFLEXIVITY → OROCHI → VMAP → FORECAST → CONFLUENCE → RISK → EXECUTION</code><br>Source: <code>Yahoo Finance gold futures proxy</code> • Chart: <code>TradingView</code> • WAIT / NO TRADE adalah output valid.</p>
-</aside></div>
-<div class="footer">IRENX PRIME • Web-first • Mobile-ready • No Screenshot Mode</div>
-</main>
-<script src="https://s3.tradingview.com/tv.js"></script>
-<script>
-const $=id=>document.getElementById(id);let tfs=['1d','4h','30m','15m','5m'];
-function renderChart(){if(!window.TradingView)return;$('tv').innerHTML='';const symbol=$('symbol').value==='XAUUSD'?'OANDA:XAUUSD':'COMEX:GC1!';new TradingView.widget({autosize:true,symbol,interval:'15',timezone:'Asia/Jakarta',theme:'dark',style:'1',locale:'en',hide_top_toolbar:false,hide_side_toolbar:true,allow_symbol_change:false,save_image:false,container_id:'tv',studies:[]});$('symbolLabel').textContent=$('symbol').value==='XAUUSD'?'XAUUSD':'GOLD / GC'}
-function txt(id,v){$(id).textContent=v??'—'}
-function tone(id,v){const e=$(id),s=String(v||'').toUpperCase();e.className='';e.classList.add(s.includes('BUY')||s.includes('ALIGNED')||s.includes('BULL')||s.includes('CONFIRMED')?'green':s.includes('SELL')||s.includes('BEAR')||s.includes('INVALID')?'red':s.includes('WAIT')||s.includes('NEUTRAL')||s.includes('MIXED')||s.includes('NO TRADE')?'gold':'blue')}
-function apply(d){const b=String(d.bias||'NEUTRAL').toUpperCase();txt('bias',b);$('bias').className='bias '+(b==='BUY'?'buy':b==='SELL'?'sell':'wait');txt('confidence',d.confidence!=null?'CONF '+d.confidence+'%':'CONF —');['entry','sl','tp1','tp2','tp3','regime','liquidity','reflexivity','structure','vmap','forecast','risk'].forEach(k=>txt(k,d[k]));txt('state',d.status||'NO TRADE');tone('state',d.status);$('details').innerHTML='<b>Trigger:</b> '+(d.trigger||'—')+'<br><b>Invalidation:</b> '+(d.invalidation||'—')+'<br><b>Data:</b> '+(d.data_quality||'—');$('notes').value=(d.reasons||[]).join('\n')+'\n\nNext: '+(d.next_action||'WAIT');$('engineBadge').textContent=d.status||'WAIT'}
-async function analyze(){const btn=$('analyze');btn.disabled=true;$('status').className='status busy';$('status').textContent='◌ FETCHING MARKET DATA + PRIME ENGINE…';try{const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbol:$('symbol').value,timeframes:tfs})});let d={};try{d=await r.json()}catch{throw new Error('Server returned non-JSON response')}if(!r.ok)throw new Error(d.error||'Market engine unavailable');apply(d);$('status').className='status ok';$('status').textContent='● LIVE READY • '+new Date().toLocaleTimeString('id-ID',{timeZone:'Asia/Jakarta'})}catch(e){$('status').className='status err';$('status').textContent='ERROR: '+e.message;txt('state','NO TRADE');txt('bias','WAIT');$('bias').className='bias wait'}finally{btn.disabled=false}}
-document.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>{b.classList.toggle('active');tfs=[...document.querySelectorAll('[data-tf].active')].map(x=>x.dataset.tf);txt('tfCount',tfs.length+' TF');if(tfs.length===0){b.classList.add('active');tfs=[b.dataset.tf]}});$('symbol').onchange=()=>{renderChart();analyze()};$('analyze').onclick=analyze;$('focus').onclick=analyze;setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Asia/Jakarta'})+' • LIVE'},1000);renderChart();setTimeout(analyze,1200);setInterval(analyze,60000);
-</script>
-</body>
-</html>
+<!--
+EVST // CYBER OPERATIONS
+GitHub Profile: Intrvrt6
+Theme: Black / Crimson / Cyberpunk
+-->
+
+<div align="center">
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=venom&height=260&text=EVST&fontSize=85&fontColor=ff3030&stroke=ff0000&strokeWidth=2&animation=fadeIn&color=0:050505,40:180000,100:050505&desc=CYBER%20OPERATIONS%20%7C%20REVERSE%20ENGINEERING&descSize=15&descAlignY=70" />
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=19&duration=2500&pause=900&color=FF3030&center=true&vCenter=true&width=650&lines=%3E+INITIALIZING+EVST+SYSTEM...;%3E+SECURITY+RESEARCHER;%3E+REVERSE+ENGINEERING+ENTHUSIAST;%3E+LINUX+%7C+PYTHON+%7C+BINARY+ANALYSIS;%3E+HACK.+ANALYZE.+SECURE." />
+
+<br/>
+
+<img src="https://img.shields.io/badge/IDENTITY-EVST-ff0000?style=for-the-badge&logo=hackthebox&logoColor=white" />
+<img src="https://img.shields.io/badge/FOCUS-CYBERSECURITY-111111?style=for-the-badge&logo=kalilinux&logoColor=red" />
+<img src="https://img.shields.io/badge/MODE-ALWAYS_LEARNING-111111?style=for-the-badge&logo=linux&logoColor=white" />
+
+<br/><br/>
+
+<strong>HACK. ANALYZE. SECURE.</strong>
+
+<em>Think deeper. Break further. Secure better.</em>
+
+</div>
+
+---
+
+## `01` // WHO AM I
+
+```bash
+┌──[EVST@Intrvrt6]
+└─$ whoami
+
+Identity: EVST
+Codename: Intrvrt6
+Focus: Cyber Security
+Interest: Reverse Engineering
+Environment: Linux
+Status: Learning & Building
+```
+
+I'm a cybersecurity enthusiast interested in understanding systems, exploring software internals, and researching digital security.
+
+I enjoy reverse engineering, Linux environments, security research, and learning how software works beneath the surface.
+
+## `02` // OPERATIONAL DOMAINS
+
+| Domain | Focus |
+|---|---|
+| 🔴 Red Team | Authorized security testing |
+| ⚫ Reverse Engineering | Binary and software analysis |
+| 🛡️ Blue Team | Defense and detection |
+| 🐧 Linux | System administration |
+| 🔬 Digital Forensics | Static and dynamic analysis |
+
+## `03` // TECH ARSENAL
+
+<div align="center">
+
+**PROGRAMMING & SCRIPTING**
+
+<img src="https://skillicons.dev/icons?i=python,c,cpp,bash&theme=dark" />
+
+**OPERATING SYSTEMS & SECURITY**
+
+<img src="https://skillicons.dev/icons?i=linux,kali,docker&theme=dark" />
+
+**DEVELOPMENT & TOOLS**
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode&theme=dark" />
+
+</div>
+
+## `04` // CURRENT RESEARCH
+
+- Reverse Engineering
+- Binary Analysis
+- Linux Internals
+- Network Security
+- Digital Forensics
+- Secure Coding
+- Malware analysis in isolated labs
+
+## `05` // GITHUB INTELLIGENCE
+
+<div align="center">
+
+<img width="49%" src="https://github-readme-stats.vercel.app/api?username=Intrvrt6&show_icons=true&hide_border=true&bg_color=080808&title_color=ff3030&icon_color=ff3030&text_color=ffffff&include_all_commits=true" />
+
+<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Intrvrt6&layout=compact&hide_border=true&bg_color=080808&title_color=ff3030&text_color=ffffff" />
+
+<br/><br/>
+
+<img width="90%" src="https://streak-stats.demolab.com?user=Intrvrt6&hide_border=true&background=080808&stroke=ff3030&ring=ff3030&fire=ff3030&currStreakLabel=ff3030&sideLabels=ffffff&currStreakNum=ffffff&sideNums=ffffff&dates=888888" />
+
+</div>
+
+## `06` // CONTRIBUTION MATRIX
+
+<div align="center">
+
+<img width="100%" src="https://raw.githubusercontent.com/Intrvrt6/Intrvrt6/output/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake" />
+
+</div>
+
+## `07` // CONNECT
+
+<div align="center">
+
+<a href="https://github.com/Intrvrt6">
+  <img src="https://img.shields.io/badge/GITHUB-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a>
+
+<a href="https://github.com/Intrvrt6?tab=repositories">
+  <img src="https://img.shields.io/badge/PROJECTS-111111?style=for-the-badge&logo=github&logoColor=red" alt="Projects" />
+</a>
+
+</div>
+
+---
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=17&duration=2500&pause=1000&color=FF3030&center=true&vCenter=true&width=500&lines=STAY+CURIOUS.;THINK+DIFFERENT.;NEVER+STOP+LEARNING." />
+
+### `HACK. ANALYZE. SECURE.`
+
+<sub>EVST // Intrvrt6 — Exploring the digital frontier.</sub>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:550000,100:ff0000&height=120&section=footer" />
+
+</div>

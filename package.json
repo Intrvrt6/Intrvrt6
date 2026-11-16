@@ -1,0 +1,16 @@
+{
+  "name": "irenx-prime-ea-website",
+  "version": "1.0.0",
+  "description": "IRENX PRIME EA trading intelligence system",
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Static site - use vercel dev'",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": ["trading", "forex", "xauusd", "ea"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.1.0"
+  }
+}

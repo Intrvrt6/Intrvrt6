@@ -1,102 +1,188 @@
-# 🔴 EVST | Intrvrt6
+\<!--
+&#x20; EVST // CYBER OPERATIONS
+&#x20; GitHub Profile: Intrvrt6
+&#x20; Theme: Black / Crimson / Cyberpunk
+\-->
 
-<div align="center">
+\<div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:550000,100:ff0000&height=200&section=header&text=EVST&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=HACK%20%E2%80%A2%20ANALYZE%20%E2%80%A2%20SECURE&descSize=16&descAlignY=60" width="100%" />
+\<img width="100%" src="[https://capsule-render.vercel.app/api?type=venom&height=260&text=EVST&fontSize=85&fontColor=ff3030&stroke=ff0000&strokeWidth=2&animation=fadeIn&color=0:050505,40:180000,100:050505&desc=CYBER%20OPERATIONS%20%7C%20REVERSE%20ENGINEERING&descSize=15&descAlignY=70](https://capsule-render.vercel.app/api?type=venom\&height=260\&text=EVST\&fontSize=85\&fontColor=ff3030\&stroke=ff0000\&strokeWidth=2\&animation=fadeIn\&color=0:050505,40:180000,100:050505\&desc=CYBER%20OPERATIONS%20%7C%20REVERSE%20ENGINEERING\&descSize=15\&descAlignY=70)" />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&duration=3000&pause=1000&color=FF3030&center=true&vCenter=true&width=600&lines=Security+Researcher;Reverse+Engineering+Enthusiast;Linux+%26+Open+Source+Explorer;Think+Deeper.+Break+Further.+Secure+Better." />
+\<img src="[https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=19&duration=2500&pause=900&color=FF3030&center=true&vCenter=true&width=650&lines=%3E+INITIALIZING+EVST+SYSTEM...;%3E+SECURITY+RESEARCHER;%3E+REVERSE+ENGINEERING+ENTHUSIAST;%3E+LINUX+%7C+PYTHON+%7C+BINARY+ANALYSIS;%3E+HACK.+ANALYZE.+SECURE](https://readme-typing-svg.demolab.com?font=JetBrains+Mono\&weight=700\&size=19\&duration=2500\&pause=900\&color=FF3030\&center=true\&vCenter=true\&width=650\&lines=%3E+INITIALIZING+EVST+SYSTEM...;%3E+SECURITY+RESEARCHER;%3E+REVERSE+ENGINEERING+ENTHUSIAST;%3E+LINUX+%7C+PYTHON+%7C+BINARY+ANALYSIS;%3E+HACK.+ANALYZE.+SECURE)." />
 
-<br>
+\<br/>
 
-[![GitHub](https://img.shields.io/badge/GitHub-Intrvrt6-111111?style=for-the-badge&logo=github)](https://github.com/Intrvrt6)
-[![Profile Views](https://komarev.com/ghpvc/?username=Intrvrt6&style=for-the-badge&color=red)](https://github.com/Intrvrt6)
+\<img src="[https://img.shields.io/badge/IDENTITY-EVST-ff0000?style=for-the-badge&logo=hackthebox&logoColor=white](https://img.shields.io/badge/IDENTITY-EVST-ff0000?style=for-the-badge\&logo=hackthebox\&logoColor=white)" /> \<img src="[https://img.shields.io/badge/FOCUS-CYBERSECURITY-111111?style=for-the-badge&logo=kalilinux&logoColor=red](https://img.shields.io/badge/FOCUS-CYBERSECURITY-111111?style=for-the-badge\&logo=kalilinux\&logoColor=red)" /> \<img src="[https://img.shields.io/badge/MODE-ALWAYS_LEARNING-111111?style=for-the-badge&logo=linux&logoColor=white](https://img.shields.io/badge/MODE-ALWAYS_LEARNING-111111?style=for-the-badge\&logo=linux\&logoColor=white)" />
 
-</div>
+\<br/>\<br/>
+
+**`HACK. ANALYZE. SECURE.`**
+
+*Think deeper. Break further. Secure better.*
+
+\</div>
 
 ---
 
-## `whoami`
+\<table>
+\<tr>
+\<td width="60%" valign="top">
+
+## `01` // WHO AM I
 
 ```bash
-┌──(evst㉿kali)-[~]
-└─$ whoami
+┌──[EVST@Intrvrt6]
+└─$ ./identity.sh
 
-EVST / Intrvrt6
-Security Enthusiast
-Reverse Engineering Explorer
-Linux & Open Source Learner
+[+] Initializing profile...
+[+] Identity: EVST
+[+] Codename: Intrvrt6
+[+] Location: Indonesia
+[+] Interest: Cyber Security
+[+] Specialty: Reverse Engineering
+[+] Status: Learning & Building
+
+[OK] System initialized.
 ```
 
-Hello! I'm **EVST**, a technology enthusiast interested in cybersecurity, system internals, and reverse engineering.
+I'm a cybersecurity enthusiast passionate about understanding systems, exploring software internals, and researching digital security.
 
-I enjoy understanding how systems work, investigating vulnerabilities in authorized environments, and exploring the technology behind software.
+My interests include reverse engineering, Linux environments, security research, and understanding how software works beneath the surface.
 
-> **Hack. Analyze. Secure.**
+\</td> \<td width="40%" valign="top">
 
-## ⚡ Areas of Interest
+## `02` // STATUS
 
-| Domain | Focus |
-|---|---|
-| 🔴 Cyber Security | Security Research |
-| ⚫ Reverse Engineering | Binary & Software Analysis |
-| 🐉 Red Team | Authorized Security Testing |
-| 🛡️ Blue Team | Defensive Security |
-| 🐧 Linux | System Administration |
-| 🔬 Malware Analysis | Static & Dynamic Analysis |
+\<img src="[https://img.shields.io/badge/STATUS-LEARNING-00ff66?style=flat-square](https://img.shields.io/badge/STATUS-LEARNING-00ff66?style=flat-square)" />
 
-## 🧰 Tech Stack
+\<img src="[https://img.shields.io/badge/SECURITY-RESEARCH-ff3030?style=flat-square](https://img.shields.io/badge/SECURITY-RESEARCH-ff3030?style=flat-square)" />
 
-<div align="center">
+\<img src="[https://img.shields.io/badge/ENVIRONMENT-LINUX-ffffff?style=flat-square&logo=linux&logoColor=black](https://img.shields.io/badge/ENVIRONMENT-LINUX-ffffff?style=flat-square\&logo=linux\&logoColor=black)" />
 
-<img src="https://skillicons.dev/icons?i=linux,kali,python,c,cpp,bash,git,github,vscode,docker&theme=dark" />
+\<img src="[https://img.shields.io/badge/MINDSET-OPEN_SOURCE-ff3030?style=flat-square](https://img.shields.io/badge/MINDSET-OPEN_SOURCE-ff3030?style=flat-square)" />
 
-</div>
+**Current mission**
 
-## 🔬 Currently Exploring
+- Understand systems
+- Analyze binaries
+- Improve security skills
+- Build useful tools
 
-- Reverse Engineering
-- Binary Analysis
-- Linux Internals
-- Network Security
-- Digital Forensics
-- Secure Coding
-- Malware Analysis in isolated labs
+\</td> \</tr> \</table>
 
-## 📊 GitHub Statistics
+## `03` // OPERATIONAL DOMAINS
 
-<div align="center">
+\<table> \<tr> \<td align="center" width="33%">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=Intrvrt6&show_icons=true&theme=github_dark&hide_border=true&title_color=ff3030&icon_color=ff3030&text_color=ffffff&bg_color=050505" />
+### 🔴 RED TEAM
 
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Intrvrt6&layout=compact&theme=github_dark&hide_border=true&title_color=ff3030&text_color=ffffff&bg_color=050505" />
+Security Testing
 
-<img width="95%" src="https://streak-stats.demolab.com?user=Intrvrt6&theme=dark&hide_border=true&ring=ff3030&fire=ff3030&currStreakLabel=ff3030&background=050505" />
+\</td> \<td align="center" width="33%">
 
-</div>
+### ⚫ REVERSE
 
-## 🐍 Contribution Activity
+Binary Analysis
 
-<div align="center">
+\</td> \<td align="center" width="33%">
 
-<img src="https://raw.githubusercontent.com/Intrvrt6/Intrvrt6/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Contribution Snake" />
+### 🛡️ BLUE TEAM
 
-</div>
+Defense & Detection
 
-## 🎯 Philosophy
+\</td> \</tr> \<tr> \<td align="center">
+
+Authorized Pentesting
+
+\</td> \<td align="center">
+
+Software Internals
+
+\</td> \<td align="center">
+
+Threat Investigation
+
+\</td> \</tr> \</table>
+
+## `04` // TECH ARSENAL
+
+\<div align="center">
+
+**PROGRAMMING & SCRIPTING**
+
+\<img src="[https://skillicons.dev/icons?i=python,c,cpp,bash&theme=dark](https://skillicons.dev/icons?i=python,c,cpp,bash\&theme=dark)" />
+
+**OPERATING SYSTEMS & SECURITY**
+
+\<img src="[https://skillicons.dev/icons?i=linux,kali,docker&theme=dark](https://skillicons.dev/icons?i=linux,kali,docker\&theme=dark)" />
+
+**DEVELOPMENT & TOOLS**
+
+\<img src="[https://skillicons.dev/icons?i=git,github,vscode&theme=dark](https://skillicons.dev/icons?i=git,github,vscode\&theme=dark)" />
+
+\</div>
+
+## `05` // RESEARCH INTERESTS
 
 ```text
-[+] Never stop learning.
-[+] Understand before exploiting.
-[+] Build before breaking.
-[+] Secure what matters.
+[01] Reverse Engineering
+     └── Binary Analysis / Software Internals
+
+[02] Cyber Security
+     └── Vulnerability Research
+
+[03] Digital Forensics
+     └── Static & Dynamic Analysis
+
+[04] Linux Internals
+     └── System Architecture
+
+[05] Network Security
+     └── Protocol Analysis
 ```
 
-<div align="center">
+## `06` // GITHUB INTELLIGENCE
 
-### ⚡ HACK. ANALYZE. SECURE.
+\<div align="center">
 
-**Think Deeper. Break Further. Secure Better.**
+\<img width="49%" src="[https://github-readme-stats.vercel.app/api?username=Intrvrt6&show_icons=true&hide_border=true&bg_color=080808&title_color=ff3030&icon_color=ff3030&text_color=ffffff&include_all_commits=true](https://github-readme-stats.vercel.app/api?username=Intrvrt6\&show_icons=true\&hide_border=true\&bg_color=080808\&title_color=ff3030\&icon_color=ff3030\&text_color=ffffff\&include_all_commits=true)" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0000,50:550000,100:050505&height=120&section=footer" width="100%" />
+\<img width="49%" src="[https://github-readme-stats.vercel.app/api/top-langs/?username=Intrvrt6&layout=compact&hide_border=true&bg_color=080808&title_color=ff3030&text_color=ffffff](https://github-readme-stats.vercel.app/api/top-langs/?username=Intrvrt6\&layout=compact\&hide_border=true\&bg_color=080808\&title_color=ff3030\&text_color=ffffff)" />
 
-</div>
+\<br/>\<br/>
+
+\<img width="90%" src="[https://streak-stats.demolab.com?user=Intrvrt6&hide_border=true&background=080808&stroke=ff3030&ring=ff3030&fire=ff3030&currStreakLabel=ff3030&sideLabels=ffffff&currStreakNum=ffffff&sideNums=ffffff&dates=888888](https://streak-stats.demolab.com?user=Intrvrt6\&hide_border=true\&background=080808\&stroke=ff3030\&ring=ff3030\&fire=ff3030\&currStreakLabel=ff3030\&sideLabels=ffffff\&currStreakNum=ffffff\&sideNums=ffffff\&dates=888888)" />
+
+\</div>
+
+## `07` // CONTRIBUTION MATRIX
+
+\<div align="center">
+
+\<img width="100%" src="[https://raw.githubusercontent.com/Intrvrt6/Intrvrt6/output/github-contribution-grid-snake-dark.svg](https://raw.githubusercontent.com/Intrvrt6/Intrvrt6/output/github-contribution-grid-snake-dark.svg)" alt="Contribution Snake" />
+
+\</div>
+
+## `08` // CONNECT TO EVST
+
+\<div align="center">
+
+\<a href="[https://github.com/Intrvrt6](https://github.com/Intrvrt6)"> \<img src="[https://img.shields.io/badge/GITHUB-000000?style=for-the-badge&logo=github&logoColor=white](https://img.shields.io/badge/GITHUB-000000?style=for-the-badge\&logo=github\&logoColor=white)" /> \</a>
+
+\<a href="[https://github.com/Intrvrt6?tab=repositories](https://github.com/Intrvrt6?tab=repositories)"> \<img src="[https://img.shields.io/badge/PROJECTS-111111?style=for-the-badge&logo=github&logoColor=red](https://img.shields.io/badge/PROJECTS-111111?style=for-the-badge\&logo=github\&logoColor=red)" /> \</a>
+
+\</div>
+
+---
+
+\<div align="center">
+
+\<img src="[https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=17&duration=2500&pause=1000&color=FF3030&center=true&vCenter=true&width=500&lines=STAY+CURIOUS.;THINK+DIFFERENT.;NEVER+STOP+LEARNING](https://readme-typing-svg.demolab.com?font=JetBrains+Mono\&weight=700\&size=17\&duration=2500\&pause=1000\&color=FF3030\&center=true\&vCenter=true\&width=500\&lines=STAY+CURIOUS.;THINK+DIFFERENT.;NEVER+STOP+LEARNING)." />
+
+### `HACK. ANALYZE. SECURE.`
+
+\<sub>EVST // Intrvrt6 — Exploring the digital frontier.\</sub>
+
+\<img width="100%" src="[https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:550000,100\:ff0000&height=120&section=footer](https://capsule-render.vercel.app/api?type=waving\&color=0:050505,50:550000,100\:ff0000\&height=120\&section=footer)" />
+
+\</div>

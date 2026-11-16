@@ -1,13 +1,10 @@
 
-name: Generate Contribution Snake
+name: EVST Contribution Animation
 
 on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -24,7 +21,7 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      - name: Publish Snake
+      - name: Deploy
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
